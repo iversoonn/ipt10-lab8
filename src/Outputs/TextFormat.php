@@ -17,11 +17,36 @@ class TextFormat implements ProfileFormatter
         $output .= "Education: " . $profile->getEducation()['degree'] . " at " . $profile->getEducation()['university'] . PHP_EOL;
         $output .= "Skills: " . implode(", ", $profile->getSkills()) . PHP_EOL;
 
-        // Add experience, certifications, etc.
+        
         $output .= "Experience:\n";
         foreach ($profile->getExperience() as $job) {
             $output .= "- " . $job['job_title'] . " at " . $job['company'] . " (" . $job['start_date'] . " to " . $job['end_date'] . ")\n";
+
         }
+        $output .= "Certifications:\n";
+        foreach ($profile->getCertifications() as $certification) {
+            $output .= "- " . $certification['name'] . " (earned on " . $certification['date_earned'] . ")\n";
+        }
+
+        
+        $output .= "Extracurricular Activities:\n";
+        foreach ($profile->getExtracurricularActivities() as $activity) {
+            $output .= "- " . $activity['role'] . " at " . $activity['organization'] . " (" . $activity['start_date'] . " to " . $activity['end_date'] . "): " . $activity['description'] . PHP_EOL;
+        }
+
+       
+        $output .= "Languages:\n";
+        foreach ($profile->getLanguages() as $language) {
+            $output .= "- " . $language['language'] . " (" . $language['proficiency'] . ")\n";
+        }
+
+       
+        $output .= "References:\n";
+        foreach ($profile->getReferences() as $reference) {
+            $output .= "- " . $reference['name'] . ", " . $reference['position'] . " at " . $reference['company'] . " (Email: " . $reference['email'] . ", Phone: " . $reference['phone_number'] . ")\n";
+        }
+
+        
         $this->response = $output;
     }
 
